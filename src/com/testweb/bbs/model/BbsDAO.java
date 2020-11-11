@@ -148,10 +148,11 @@ public class BbsDAO {
 	}
 	
 	//게시글 수정 처리 메서드
-	public void update(int bno, String title, String content) {
+	public int update(int bno, String title, String content) {
 		
 		//알맞는 sql
 		String sql = "UPDATE bbs SET title = ?, content = ? WHERE bno = ?";
+		int result = 0;
 		
 		try {
 			//연결
@@ -160,7 +161,7 @@ public class BbsDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			pstmt.setInt(3, bno);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			System.out.println("update()메서드 에러 발생");
@@ -168,6 +169,8 @@ public class BbsDAO {
 		} finally {
 			JdbcUtil.close(conn, pstmt, rs);
 		}
+		
+		return result;
 	}
 	
 	//메인화면 최신 공지글 10개 출력
