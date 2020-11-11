@@ -15,12 +15,14 @@
                     <div class="titlebox">
                         MEMBER                   
                     </div>
+                    <div align="center" style="color: red; font-size: larger;">${msg }</div>
                     <div>
                         <p>${sessionScope.login.id }(${sessionScope.login.name })님 회원정보</p>
                     </div>
                     <div>
                         <button type="button" class="btn btn-primary" onclick="location.href='mypageinfo.user'">회원정보변경</button>
                         <button type="button" class="btn btn-primary" id="delCheck">회원 탈퇴</button>
+                        
                         
                     </div>
                     <div class="delete-hidden">
@@ -29,6 +31,7 @@
 	                        <button type="button" class="btn btn-primary" onclick="check()">확인</button>
                         </form>
                     </div>
+                    
                     
                     <br>
                     <div>

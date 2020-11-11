@@ -28,10 +28,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-9 col-sm-12 join-form">
-				<h2>
-					회원가입<small>(가운데정렬)</small>
-				</h2>
-
+				<h2>회원가입<small>(가운데정렬)</small></h2>
+				<div align="center" style="color: red;">${msg }</div>
+				
 				<form action="joinForm.user" method="post" name="regForm">
 					<div class="form-group">
 						<label for="id">아이디</label> 
@@ -58,7 +57,7 @@
 						<label for="hp">휴대폰번호</label><br> <input
 							class="form-control sel" placeholder="010" id="phone1" name="phone1" required> - <input
 							class="form-control sel" placeholder="xxxx" id="phone2" name="phone2" required> - <input
-							class="form-control sel" placeholder="xxxx" id="phone3" name="phone3" required> FF
+							class="form-control sel" placeholder="xxxx" id="phone3" name="phone3" required> 
 					</div>
 					<div class="form-group">
 						<label for="hp">이메일</label><br> 

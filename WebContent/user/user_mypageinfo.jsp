@@ -11,8 +11,9 @@
 			<div class="col-xs-12 col-md-9 join-form">
 
 				<div class="titlebox">MEMBER INFO</div>
-
+				<div align="center" style="color: red; font-size: larger;">${msg }</div>
 				<p>*표시는 필수 입력 표시입니다</p>
+				
 				<form action="update.user" method="post" name="regForm">
 				<table class="table" >
 					<tbody class="m-control">
@@ -22,20 +23,20 @@
 						</tr>
 						<tr>
 							<td class="m-title">*이름</td>
-							<td><input class="form-control input-sm" name="name" value="${sessionScope.login.name }"></td>
+							<td><input class="form-control input-sm" name="name" value="${sessionScope.login.name }" required></td>
 						</tr>
 						<tr>
 							<td class="m-title">*비밀번호</td>
-							<td><input type="password" class="form-control input-sm" name="password"></td>
+							<td><input type="password" class="form-control input-sm" name="password" required></td>
 						</tr>
 						<tr>
 							<td class="m-title">*비밀번호확인</td>
-							<td><input type="password" class="form-control input-sm" name="pwcheck"></td>
+							<td><input type="password" class="form-control input-sm" name="pwcheck" required></td>
 						</tr>
 						<tr>
 							<td class="m-title">*E-mail</td>
 							<td>
-								<input class="form-control input-sm" name="email" value="${sessionScope.login.email }">@ 
+								<input class="form-control input-sm" name="email" value="${sessionScope.login.email }" required />@ 
 								<select class="form-control input-sm sel" name="eaddr">
 										<option>naver.com</option>
 										<option>gmail.com</option>
@@ -47,21 +48,21 @@
 						<tr>
 							<td class="m-title">*휴대폰</td>
 							<td>
-								<input class="form-control input-sm sel" name="phone1" value="${sessionScope.login.phone1 }"> - 
-								<input class="form-control input-sm sel" name="phone2" value="${sessionScope.login.phone2 }"> - 
-								<input class="form-control input-sm sel" name="phone3" value="${sessionScope.login.phone3 }">
+								<input class="form-control input-sm sel" name="phone1" value="${sessionScope.login.phone1 }" required /> - 
+								<input class="form-control input-sm sel" name="phone2" value="${sessionScope.login.phone2 }" required /> - 
+								<input class="form-control input-sm sel" name="phone3" value="${sessionScope.login.phone3 }" required />
 							</td>
 						</tr>
 						<tr>
 							<td class="m-title">*주소</td>
 							<td>
-								<input class="form-control input-sm add" name="addr_basic" value="${sessionScope.login.addr_basic }">
+								<input class="form-control input-sm add" name="addr_basic" value="${sessionScope.login.addr_basic }" required />
 							</td>
 						</tr>
 						<tr>
 							<td class="m-title">*상세주소</td>
 							<td>
-								<input class="form-control input-sm add" name="addr_detail" value="${sessionScope.login.addr_detail }">
+								<input class="form-control input-sm add" name="addr_detail" value="${sessionScope.login.addr_detail }" required />
 							</td>
 						</tr>
 					</tbody>

@@ -30,17 +30,21 @@ public class UserUpdateServiceImpl implements UserService {
 		
 		if(password.equals(pwcheck)) {
 			UserVO vo = new UserVO(id, password, name, phone1, phone2, phone3, email, eaddr, addr_basic, addr_detail, null);
-			dao.update(vo);
+			int result = dao.update(vo);
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("login", vo);//세션 갱신
-
-			return 1;
-		} else {
-			
-			return 0;
+			if(result == 1) {//update 성공
+				HttpSession session = request.getSession();
+				session.setAttribute("login", vo);//세션 갱신
+				
+				return result;
+			} else {//update 실패
+				request.setAttribute("msg", "정보 수정을 실패했습니다");
+				return result;
+			}
+		} else {//비밀번호확인 틀림
+			return 11;
 		}
-
+		
 	}
 
 }

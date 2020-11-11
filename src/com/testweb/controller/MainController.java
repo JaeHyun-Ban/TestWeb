@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
 		String conPath = request.getContextPath();
 		String command = uri.substring(conPath.length());
 		
-		System.out.println("command: " + command);
+		System.out.println("command:" + command);
 		
 		
 		MainService service = null;

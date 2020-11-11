@@ -8,7 +8,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 col-sm-12 join-form">
                     <h2>게시판 상세보기<small>(디자인이궁금하세요?)</small></h2>
-
+                    
+					<div align="center" style="color: red; font-size: larger;">${msg }</div>
+					
                     <form action="modify.bbs" method="post" name="regForm">
                         <div class="form-group">
                             <label>등록일</label>
@@ -20,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label>글쓴이</label>
-                            <input type="text" name="id" class="form-control" value="${vo.writer }" placeholder="자유" readonly>
+                            <input type="text" name="writer" class="form-control" value="${vo.writer }" placeholder="자유" readonly>
                         </div>
                         <div class="form-group">
                             <label>제목</label>

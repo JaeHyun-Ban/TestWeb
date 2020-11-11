@@ -13,6 +13,7 @@ import com.testweb.bbs.service.BbsService;
 import com.testweb.bbs.service.ContentServiceImpl;
 import com.testweb.bbs.service.DeleteServiceImpl;
 import com.testweb.bbs.service.GetListServiceImpl;
+import com.testweb.bbs.service.ModifyCheckServiceImpl;
 import com.testweb.bbs.service.ModifyServiceImpl;
 import com.testweb.bbs.service.RegistServiceImpl;
 import com.testweb.bbs.service.UpdateServiceImpl;
@@ -74,31 +75,49 @@ public class BbsController extends HttpServlet {
 		} else if (command.equals("/bbs/regist.bbs")) {
 			service = new RegistServiceImpl();
 			service.execute(request, response);
-
+			
 			response.sendRedirect("list.bbs");
-			// 게시물 수정 화면 처리
+			
+			//////////////////게시물 수정 화면 처리//////////////////
 		} else if (command.equals("/bbs/modify.bbs")) {
 			
-			//작성자 - 로그인 id 비교
-			service = new ModifyServiceImpl();
+			//로그인 id, 작성자를 비교 
+			service = new ModifyCheckServiceImpl();
 			service.execute(request, response);
+			int result = (int) request.getAttribute("check");
 			
-			int result = (int) request.getAttribute("modify");
-			
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			if(result == 1) {//작성자가 같을 시
-				// 글을 불러오는 content서비스를 재활용
+			if(result == 1) {//작성자 = 로그인
 				service = new ContentServiceImpl();
 				service.execute(request, response);
+				
 				request.getRequestDispatcher("bbs_modify.jsp").forward(request, response);
-			}else {//작성자가 다를 시
-				out.println("<script>");
-				out.println("alert('작성자가 아닙니다');");
-				out.println("</script>");
-				response.sendRedirect("content.bbs?bno="+request.getParameter("bno"));
+			} else {//작성자 != 로그인
+				request.setAttribute("msg", "수정할 권한이 존재하지 않습니다");
+				
+				service = new ContentServiceImpl();
+				service.execute(request, response);
+				
+				request.getRequestDispatcher("bbs_content.jsp").forward(request, response);
 				
 			}
+			
+			
+			
+			
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//			if(result == 1) {//작성자가 같을 시
+//				// 글을 불러오는 content서비스를 재활용
+//				service = new ContentServiceImpl();
+//				service.execute(request, response);
+//				request.getRequestDispatcher("bbs_modify.jsp").forward(request, response);
+//			}else {//작성자가 다를 시
+//				out.println("<script>");
+//				out.println("alert('작성자가 아닙니다');");
+//				out.println("</script>");
+//				response.sendRedirect("content.bbs?bno="+request.getParameter("bno"));
+//				
+//			}
 				
 
 			// 게시글 수정 처리

@@ -24,18 +24,22 @@ public class UserJoinServiceImpl implements UserService {
 		
 
 		UserDAO dao = UserDAO.getInstance();//dao생성
-				
-		int result = dao.checkID(id);//id로 중복검사
 		
-		//중복o=1, 중복x=0
-		if(result == 1) {
-			return 1;
-		} else {
+		//id로 중복검사
+		int result = dao.checkID(id);
+		if(result == 0) {//중복x
 			UserVO vo = new UserVO(id, password, name, phone1, phone2, phone3, email, eaddr, addr_basic, addr_detail, null);
-			dao.join(vo);
+			int num = dao.join(vo);//join진행
 			
-			return 0;
+			if(num == 1) {//join 성공(required만 다채움 > 성공)
+				return 1;
+			} else {//join 실패 
+				return 0;
+			}	
+		} else {//중복된 o
+			return 11;
 		}
+		
 	}
 
 }

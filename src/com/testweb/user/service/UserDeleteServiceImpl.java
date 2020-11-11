@@ -22,11 +22,15 @@ public class UserDeleteServiceImpl implements UserService {
 		UserDAO dao = UserDAO.getInstance();
 		if(password.equals(check)) {//비밀번호가 일치
 			String id = vo.getId();
-			dao.delete(id, password);
-			session.invalidate();//세션 삭제
+			int result = dao.delete(id, password);//delete진행
 			
-			return 1;
-		} else {
+			if(result == 1) {//delete성공
+				session.invalidate();//세션 삭제
+				return 1;
+			} else {
+				return 0;
+			}
+		} else {//비밀번호가 일치하지 않음
 			return 0;
 		}
 	}

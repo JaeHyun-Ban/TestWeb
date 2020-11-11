@@ -1,6 +1,8 @@
 package com.testweb.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,10 +80,21 @@ public class UserController extends HttpServlet {
 			service = new UserUpdateServiceImpl();
 			int result = service.execute(request, response);
 			
-			if(result == 1) {//성공
-				response.sendRedirect("mypage.user");
-			} else {//실패
+			if(result == 11) {//비밀번호 확인 틀림
+				request.setAttribute("msg", "비밀번호를 다시 확인해주세요 다릅니다");
+				request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
 				
+			} else if(result == 1) {//성공
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('정보가 수정되었습니다');");
+				out.println("location.href='/TestWeb/user/mypage.user';");
+				out.println("</script>");
+				
+			} else if(result == 0){//실패
+				request.setAttribute("msg", "정보 수정을 실패했습니다");
+				request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
 			}
 		
 			// 회원가입 처리
@@ -90,13 +103,21 @@ public class UserController extends HttpServlet {
 			service = new UserJoinServiceImpl();
 			int result = service.execute(request, response);
 
-			if (result == 1) {//중복o=1
-				request.setAttribute("msg", "이미 가입된 회원입니다");
+			if (result == 11) {//중복o == 11
+				request.setAttribute("msg", "이미 존재하는 회원 입니다");
 				request.getRequestDispatcher("user_join.jsp").forward(request, response);
-
-			} else {//중복x=0
-				response.sendRedirect("login.user");
-			}
+				
+			} else if(result == 1) { //가입됨
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('회원가입 되었습니다');");
+				out.println("location.href='/TestWeb/user/login.user';");
+				out.println("</script>");
+			} else if(result == 0){
+				request.setAttribute("msg", "가입 실패했습니다");
+				request.getRequestDispatcher("user_join.jsp").forward(request, response);
+			} 
 			
 			//로그인 처리
 		}else if(command.equals("/user/loginForm.user")) {
@@ -121,11 +142,18 @@ public class UserController extends HttpServlet {
 			service = new UserDeleteServiceImpl();
 			int result = service.execute(request, response);
 			
-			if(result == 1) {
-				//다시 로그인 화면으로
-				response.sendRedirect("login.user");
-			} else {
-				request.setAttribute("msg", "다시 확인해주세요");
+			if(result == 1) {//탈퇴성공
+				//문구 + 다시 로그인 화면으로
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('탈퇴되었습니다');");
+				out.println("location.href='/TestWeb/';");
+				out.println("</script>");
+				
+			} else {//탈퇴실패
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
+				request.getRequestDispatcher("mypage.user").forward(request, response);
 			}
 			
 			

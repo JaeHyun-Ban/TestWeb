@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.testweb.util.JdbcUtil;
@@ -47,7 +49,8 @@ public class UserDAO {
 	public int join(UserVO vo) {
 		
 		//1.가입sql 생성
-		String sql = "INSERT INTO members(id, password, name, phone1, phone2, phone3, email, eaddr, addr_basic, addr_detail) "
+		String sql = "INSERT INTO "
+				+ "members(id, password, name, phone1, phone2, phone3, email, eaddr, addr_basic, addr_detail) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		int result = 0;//성공여부 반환
@@ -68,9 +71,8 @@ public class UserDAO {
 			pstmt.setString(8, vo.getEaddr());
 			pstmt.setString(9, vo.getAddr_basic());
 			pstmt.setString(10, vo.getAddr_detail());
-			
 			result = pstmt.executeUpdate();
-			
+			System.out.println(result);
 		} catch (Exception e) {
 			System.out.println("join()메서드 에러 발생");
 			e.printStackTrace();
@@ -78,7 +80,6 @@ public class UserDAO {
 		}finally {
 			JdbcUtil.close(conn, pstmt, rs);
 		}
-		
 		return result;
 	}
 
@@ -111,8 +112,6 @@ public class UserDAO {
 			//4.닫아주기
 			JdbcUtil.close(conn, pstmt, rs);
 		}
-		
-		
 		return result;
 	}
 
@@ -161,7 +160,9 @@ public class UserDAO {
 	}
 
 	//회원 삭제처리 메서드
-	public void delete(String id, String password) {
+	public int delete(String id, String password) {
+		
+		int result = 0;//결과 반환용
 		
 		//삭제 sql
 		String sql = "DELETE FROM members WHERE id = ? AND password = ?";
@@ -171,18 +172,21 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			System.out.println("delete()메서드 에러 발생");
-			e.printStackTrace();
-			
+			e.printStackTrace();	
+		} finally {
+			JdbcUtil.close(conn, pstmt, rs);
 		}
-		
+		return result;
 	}
 
 	//회원정보 수정 메서드
-	public void update(UserVO vo) {
+	public int update(UserVO vo) {
+		int result = 0;//결과 반환용
+		
 		//회원정보 수정 쿼리
 		String sql = "UPDATE members"
 					+ " SET password = ?,"
@@ -209,7 +213,8 @@ public class UserDAO {
 			pstmt.setString(8, vo.getAddr_basic());
 			pstmt.setString(9, vo.getAddr_detail());
 			pstmt.setString(10, vo.getId());
-			pstmt.executeUpdate();
+			
+			result = pstmt.executeUpdate();
 			
 			
 		} catch (Exception e) {
@@ -219,6 +224,7 @@ public class UserDAO {
 			JdbcUtil.close(conn, pstmt, rs);
 		}
 		
+		return result;
 	}
 
 
