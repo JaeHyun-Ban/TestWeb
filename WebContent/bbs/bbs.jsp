@@ -45,20 +45,27 @@
                             <!-- <td>2019-09-14 08:05</td> 이 형태로 포맷 -->
                         </tr>
                     </tbody>
-                    </c:forEach>
-                    
-                    
+                    </c:forEach>  
                 </table>
-
+                
+				<%-- 페이지 바 --%>
                 <div class="text-center">
                     <ul class="pagination pagination-sm">
-                        <li><a href="#">이전</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">다음</a></li>
+                    	<%-- 이전버튼 활성화 여부 --%>
+                    	<c:if test="${pageVO.prev }">
+                        	<li><a href="list.bbs?pageNum=${pageVO.startPage - 1}&amount=${pageVO.amount}">이전</a></li>
+                        </c:if>
+                        <%-- pagination번호 반복 출력 --%>
+                        <c:forEach var="num" begin="${pageVO.startPage }" end="${pageVO.endPage }">
+                        	<%-- active = 현재 페이지활성화 시 색칠됨 >> 3항연산으로 처리 --%>
+                        	<li class="${num eq pageVO.pageNum ? 'active' : '' }">
+                        		<a href="list.bbs?pageNum=${num }&amount=${pageVO.amount}">${num }</a>
+                        	</li>
+                        </c:forEach>
+                        <%-- 다음버튼 활성화 여부  --%>
+                        <c:if test="${pageVO.next }">
+                        	<li><a href="list.bbs?pageNum=${pageVO.endPage + 1}&amount=${pageVO.amount}">다음</a></li>
+                        </c:if>
                     </ul>
                     <button class="btn btn-info pull-right" onclick="location.href='write.bbs'">글쓰기</button>
                 </div>
@@ -66,11 +73,11 @@
             </div>
         </div>
     </section>
-        
-      
-        
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
 
  
 <%@ include file="../include/footer.jsp" %>
+
+
+
+
+

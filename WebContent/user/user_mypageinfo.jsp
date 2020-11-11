@@ -78,11 +78,11 @@
 		</div>
 
 	</div>
-<script type="text/javascript">
-	function update(){
-		document.regForm.submit();
-	}
-</script>
+	<script type="text/javascript">
+		function update(){
+			document.regForm.submit();
+		}
+	</script>
 
 </section>
 

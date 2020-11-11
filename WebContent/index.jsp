@@ -30,7 +30,7 @@ body {
 		</div>
 
 		<div class="col-md-6 col-xs-12" style="padding: 0px 0px;">
-			<h2 style="color: black">공지사항</h2>
+			<h2 style="color: black">공지사항(최신글 10개)</h2>
 			<table class="table table-striped"
 				style="text-align: center; border: 2px solid #737373">
 				<thead>

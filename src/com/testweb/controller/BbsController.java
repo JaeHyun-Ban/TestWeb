@@ -1,6 +1,8 @@
 package com.testweb.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.testweb.bbs.service.BbsService;
 import com.testweb.bbs.service.ContentServiceImpl;
+import com.testweb.bbs.service.DeleteServiceImpl;
 import com.testweb.bbs.service.GetListServiceImpl;
 import com.testweb.bbs.service.RegistServiceImpl;
 import com.testweb.bbs.service.UpdateServiceImpl;
@@ -50,10 +53,8 @@ public class BbsController extends HttpServlet {
 		//※MVC2 - forward이동이 기본※
 		//게시판 리스트  화면 처리 + 글 가져오기
 		if(command.equals("/bbs/list.bbs")) {
-			
 			service = new GetListServiceImpl();
 			service.execute(request, response);
-			
 			
 			request.getRequestDispatcher("bbs.jsp").forward(request, response);
 		
@@ -89,6 +90,30 @@ public class BbsController extends HttpServlet {
 			
 			//다시 게시물 번호로 이동
 			response.sendRedirect("content.bbs?bno=" + request.getParameter("bno"));
+			
+			//게시글 삭제  + 리스트 이동
+			
+		} else if(command.equals("/bbs/delete.bbs")) {
+			service = new DeleteServiceImpl();
+			service.execute(request, response);
+			int result = (int) request.getAttribute("delete");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			if(result == 1) {//성공		
+				out.println("<script>");
+				out.println("alert('글이 삭제되었습니다');");
+				out.println("location.href='list.bbs';");
+				out.println("</script>");
+				
+			} else {//실패
+				out.println("<script>");
+				out.println("alert('글이 삭제되지 않았습니다');");
+				out.println("location.href='list.bbs';");
+				out.println("</script>");
+			}
+			
+			
 			
 		}
 		

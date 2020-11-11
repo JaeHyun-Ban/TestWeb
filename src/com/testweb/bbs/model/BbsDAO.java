@@ -307,6 +307,28 @@ public class BbsDAO {
 		}
 		return total;
 	}
+	
+	//게시글 삭제 처러리
+	public int delete(int bno) {
+		int result = 0;
+		//삭제 sql
+		String sql = "DELETE FROM bbs WHERE bno = ?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("bbs_delete()메서드 에러 발생");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn, pstmt, rs);
+		}
+		
+		return result;
+	}
 
 	
 	
