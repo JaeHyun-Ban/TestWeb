@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!--login만 적용되는 css-->
 <style>
 .table-striped>tbody>tr {
@@ -28,11 +27,16 @@
 				<form action="loginForm.user" method="post" name="regForm">
 					<div class="form-group">
 						<label for="id">아이디</label> 
-						<input type="text" class="form-control" id="id" name="id" placeholder="아이디">
+						<input type="text" class="form-control" id="id" name="id" placeholder="아이디" required 
+							oninvalid="this.setCustomValidity('아이디를 입력하세요')" 
+							oninput="setCustomValidity('')"/>
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label> 
-						<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호 ">
+						<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호 " required 
+							oninvalid="this.setCustomValidity('비밀번호를 입력하세요')" 
+							oninput="setCustomValidity('')" />
+							
 					</div>
 
 					<div class="form-group">
@@ -41,7 +45,7 @@
 					</div>
 
 					<div class="form-group">
-						<button type="button" class="btn btn-lg btn-info btn-block" onclick="login()">로그인</button>
+						<button type="submit" class="btn btn-lg btn-info btn-block" >로그인</button>
 					</div>
 					<%-- 로그인 실패 문구 --%>
 					<div>${msg }</div>
@@ -53,11 +57,30 @@
 
 </section>
 
-<script type="text/javascript">
-	function login(){
-		document.regForm.submit();
-	}
-</script>
-
 
 <%@ include file="../include/footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

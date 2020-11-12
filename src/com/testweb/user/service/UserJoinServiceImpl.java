@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.testweb.user.model.UserDAO;
 import com.testweb.user.model.UserVO;
+import com.testweb.util.checkString;
 
 public class UserJoinServiceImpl implements UserService {
 
@@ -22,8 +23,16 @@ public class UserJoinServiceImpl implements UserService {
 		String addr_basic = request.getParameter("addr-basic");
 		String addr_detail = request.getParameter("addr-detail");
 		
-
 		UserDAO dao = UserDAO.getInstance();//dao생성
+		
+		//공백검사
+		if(checkString.str(id) || checkString.str(password) || checkString.str(name)
+				|| checkString.str(phone1) || checkString.str(phone2) || checkString.str(phone3)
+				|| checkString.str(email) || checkString.str(addr_basic) || checkString.str(addr_detail)) 
+		{
+			return 2;
+		}
+		
 		
 		//id로 중복검사
 		int result = dao.checkID(id);

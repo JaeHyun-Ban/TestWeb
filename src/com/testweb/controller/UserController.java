@@ -80,7 +80,11 @@ public class UserController extends HttpServlet {
 			service = new UserUpdateServiceImpl();
 			int result = service.execute(request, response);
 			
-			if(result == 11) {//비밀번호 확인 틀림
+			if(result == 2) {//공백이 존재
+				request.setAttribute("msg", "공백이 존재합니다");
+				request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
+				
+			} else if(result == 11) {//비밀번호 확인 틀림
 				request.setAttribute("msg", "비밀번호를 다시 확인해주세요 다릅니다");
 				request.getRequestDispatcher("user_mypageinfo.jsp").forward(request, response);
 				
@@ -102,8 +106,11 @@ public class UserController extends HttpServlet {
 
 			service = new UserJoinServiceImpl();
 			int result = service.execute(request, response);
-
-			if (result == 11) {//중복o == 11
+			if(result == 2) {
+				request.setAttribute("msg", "입력란에 공백이 존재합니다");
+				request.getRequestDispatcher("user_join.jsp").forward(request, response);
+				
+			} else if (result == 11) {//중복o == 11
 				request.setAttribute("msg", "이미 존재하는 회원 입니다");
 				request.getRequestDispatcher("user_join.jsp").forward(request, response);
 				
@@ -136,7 +143,12 @@ public class UserController extends HttpServlet {
 		} else if(command.equals("/user/logout.user")) {
 			HttpSession session = request.getSession();
 			session.invalidate();//로그아웃
-			response.sendRedirect(request.getContextPath());
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그아웃 되었습니다');");
+			out.println("location.href='/TestWeb/';");
+			out.println("</script>");	
 			
 		} else if(command.equals("/user/delete.user")) {
 			service = new UserDeleteServiceImpl();

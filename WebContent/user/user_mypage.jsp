@@ -27,8 +27,10 @@
                     </div>
                     <div class="delete-hidden">
                         <form action="delete.user" method="post" name="regForm">
-	                        <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요">
-	                        <button type="button" class="btn btn-primary" onclick="check()">확인</button>
+	                        <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required 
+		                        oninvalid="this.setCustomValidity('비밀번호를 입력하세요')" 
+								oninput="setCustomValidity('')"/>
+	                        <button type="submit" class="btn btn-primary" >확인</button>
                         </form>
                     </div>
                     

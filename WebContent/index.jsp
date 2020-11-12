@@ -45,7 +45,7 @@ body {
 				<tbody>
 					<tr>
 						<td>${vo.bno }</td>
-						<td><a>${vo.title }</a></td>
+						<td><a href="bbs/content.bbs?bno=${vo.bno }">${vo.title }</a></td>
 						<td>${vo.writer }</td>
 						<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd HH-mm"/> </td>
 						<%-- <td>2019-09-14 08:05_${num }</td> --%>

@@ -29,39 +29,39 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-9 col-sm-12 join-form">
 				<h2>회원가입<small>(가운데정렬)</small></h2>
-				<div align="center" style="color: red;">${msg }</div>
+				<div align="center" style="color: red; font-size: larger;">${msg }</div>
 				
 				<form action="joinForm.user" method="post" name="regForm">
 					<div class="form-group">
 						<label for="id">아이디</label> 
 						<input type="text" class="form-control" id="id" name="id" 
-								placeholder="아이디를 (영문포함 4~12자 이상)" required pattern="[a-zA-Z]{4,12}">
+								placeholder="아이디를 (영문포함 4~12자 이상)" required />
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label> 
 						<input type="password" class="form-control" id="password" name="password"
-							placeholder="비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)" required>
+							placeholder="비밀번호 (영 대/소문자, 숫자, 특수문자 3종류 이상 조합 8자 이상)" required />
 					</div>
 					<div class="form-group">
 						<label for="password-confrim">비밀번호 확인</label> 
 						<input type="password" class="form-control" id="password-confrim"
-							placeholder="비밀번호를 확인해주세요." required>
+							placeholder="비밀번호를 확인해주세요." required />
 					</div>
 					<div class="form-group">
 						<label for="name">이름</label> 
 						<input type="text" class="form-control" id="name" name="name"
-							placeholder="이름을 입력하세요." required>
+							placeholder="이름을 입력하세요." required />
 					</div>
 					<!--input2탭의 input-addon을 가져온다 -->
 					<div class="form-group">
-						<label for="hp">휴대폰번호</label><br> <input
-							class="form-control sel" placeholder="010" id="phone1" name="phone1" required> - <input
-							class="form-control sel" placeholder="xxxx" id="phone2" name="phone2" required> - <input
-							class="form-control sel" placeholder="xxxx" id="phone3" name="phone3" required> 
+						<label for="hp">휴대폰번호</label><br> 
+						<input class="form-control sel" placeholder="010" id="phone1" name="phone1" required /> - 
+						<input class="form-control sel" placeholder="xxxx" id="phone2" name="phone2" required /> - 
+						<input class="form-control sel" placeholder="xxxx" id="phone3" name="phone3" required /> 
 					</div>
 					<div class="form-group">
 						<label for="hp">이메일</label><br> 
-						<input class="form-control sel" id="email" name="email">@ 
+						<input class="form-control sel" id="email" name="email" required />@ 
 						<select name="eaddr" class="form-control sel">
 							<option>naver.com</option>
 							<option>gmail.com</option>
@@ -71,13 +71,13 @@
 
 					<div class="form-group">
 						<label for="addr-num">주소</label> 
-						<input type="text" class="form-control" id="addr-basic" name="addr-basic" placeholder="기본주소">
+						<input type="text" class="form-control" id="addr-basic" name="addr-basic" placeholder="기본주소" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="addr-detail" name="addr-detail"	placeholder="상세주소">
+						<input type="text" class="form-control" id="addr-detail" name="addr-detail"	placeholder="상세주소" required>
 					</div>
 					<div class="form-group">
-						<button type="button" class="btn btn-lg btn-success btn-block" onclick="joincheck()">회원가입</button>
+						<button type="submit" class="btn btn-lg btn-success btn-block">회원가입</button>
 					</div>
 					<div class="form-group">
 						<button type="button" class="btn btn-lg btn-info btn-block" onclick="location.href='login.user'">로그인</button>
@@ -90,12 +90,7 @@
 
 </section>
 
-<script type="text/javascript">
-	//회원가입 버튼 submit처리
-	function joincheck(){
-		document.regForm.submit();
-	}
-</script>
+
 <!-- onclick안에 자바스크립트 직접 작성 x, 따로 작성 후 대입 -->
 <!-- <script type="text/javascript">
 	function check() { //가입버튼 이벤트

@@ -19,24 +19,32 @@
 					<tbody class="m-control">
 						<tr>
 							<td class="m-title">*ID</td>
-							<td><input class="form-control input-sm" name="id" value="${sessionScope.login.id }" readonly></td>
+							<td><input class="form-control input-sm" name="id" value="${sessionScope.login.id }" readonly /></td>
 						</tr>
 						<tr>
 							<td class="m-title">*이름</td>
-							<td><input class="form-control input-sm" name="name" value="${sessionScope.login.name }" required></td>
+							<td><input class="form-control input-sm" name="name" value="${sessionScope.login.name }" required 
+									oninvalid="this.setCustomValidity('이름을 입력하세요')" 
+									oninput="setCustomValidity('')"/></td>
 						</tr>
 						<tr>
 							<td class="m-title">*비밀번호</td>
-							<td><input type="password" class="form-control input-sm" name="password" required></td>
+							<td><input type="password" class="form-control input-sm" name="password" required 
+									oninvalid="this.setCustomValidity('비밀번호를 입력하세요')"
+									oninput="setCustomValidity('')"/></td>
 						</tr>
 						<tr>
 							<td class="m-title">*비밀번호확인</td>
-							<td><input type="password" class="form-control input-sm" name="pwcheck" required></td>
+							<td><input type="password" class="form-control input-sm" name="pwcheck" required 
+									oninvalid="this.setCustomValidity('비밀번호를 입력하세요')"
+									oninput="setCustonValidity('')"/></td>
 						</tr>
 						<tr>
 							<td class="m-title">*E-mail</td>
 							<td>
-								<input class="form-control input-sm" name="email" value="${sessionScope.login.email }" required />@ 
+								<input class="form-control input-sm" name="email" value="${sessionScope.login.email }" required 
+										oninvalid="this.setCustomValidity('이메일을 입력하세요')"
+										oninput="setCustomValidity('')"/>@ 
 								<select class="form-control input-sm sel" name="eaddr">
 										<option>naver.com</option>
 										<option>gmail.com</option>
